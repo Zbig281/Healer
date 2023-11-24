@@ -1,5 +1,10 @@
 Healer
+
 The modification adds character healing and also repairs items put on the character.
+
+The original mod version without equipment repair. 
+https://github.com/LiF-x/Healer
+
 Requires Lifx server Framework
 
 Installation instructions
