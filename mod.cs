@@ -1,8 +1,8 @@
 /**
-* <author>Christophe Roblin</author>
-* <email>Christophe@Roblin.no</email>
+* <author>Zbig Brodaty</author>
+* <email></email>
 * <url>lifxmod.com</url>
-* <credits>Zbig Brodaty</credits>
+* <credits>Christophe Roblin, original mod</credits>
 * <description>The modification adds character healing and also repairs items put on the character.</description>
 * <license>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</license>
 */
