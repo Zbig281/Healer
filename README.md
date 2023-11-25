@@ -1,6 +1,7 @@
 # Healer Mod
 
-The modification adds character healing and also repairs items put on the character.:
+The modification adds character healing and also repairs items put on the character.
+
 [The original mod version without equipment repair.](https://github.com/LiF-x/Healer)
 
 [Video link](https://youtu.be/0Nu05rzytEc)
