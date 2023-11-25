@@ -101,6 +101,7 @@ function LiFxHealer::Heal(%client)
         %player.savePlayer();
         
         // Aktualizacja trwałości przedmiotów
+        %client.cmSendClientMessage(2475, "Your items have been repaired. ");
         dbi.Update("UPDATE items SET Durability = CreatedDurability WHERE ContainerID = (SELECT EquipmentContainerID FROM `character` WHERE ID =" SPC %client.charID SPC ") AND Durability < CreatedDurability");
 
         %client.cmSendClientMessage(2475, "You should feel better now, so please take care of yourself");
