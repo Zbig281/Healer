@@ -33,7 +33,7 @@ package LiFxHealer
       LiFx::registerCallback($LiFx::hooks::onJHEndCallbacks, enableHealer, LiFxHealer);
   }
   function LiFxHealer::version() {
-      return "1.0.1";
+      return "1.0.2";
   }
   function LiFxHealer::Healsetup() {
     LiFx::debugEcho("Healsetup");
