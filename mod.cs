@@ -123,16 +123,17 @@ function LiFxHealer::Heal(%client)
   }
 
   function LiFxHealer::getTimeToHeal(%client ){
-    return mFloor((LiFxHealerTrigger.healInterval - ((getRealTime() - %client.hasBeenHealed) / 1000)));
+    return mFloor((LiFxHealerTrigger.healInterval - ((getSimTime() - %client.hasBeenHealed) / 1000)));
   }
 
-  function LiFxHealerTrigger::onLeaveTrigger(%this, %trigger, %player) {
+  function LiFxHealer::onLeaveTrigger(%this, %trigger, %player) {
     LiFx::debugEcho ("Leave the trigger zone");
     %player.client.cmSendClientMessage(2475, "Run along and get back into the fight!");
   }
-  function LiFxHealerTrigger::onEnterTrigger(%this, %trigger, %player) {
+  function LiFxHealer::onEnterTrigger(%this, %trigger, %player) {
       LiFx::debugEcho ("Enter the trigger zone");
-      %player.client.cmSendClientMessage(2475, "Come here so i can give you a rub and heal");
+      %player.client.cmSendClientMessage(2475, "Come up here so I can make you an Archer.");
+      
   }
   function LiFxHealerTrigger::onTickTrigger(%this, %trigger) {
       for(%i = 0; %i < %trigger.getNumObjects(); %i++)
@@ -143,7 +144,7 @@ function LiFxHealer::Heal(%client)
               %tth = LiFxHealer::getTimeToHeal(%player.client);
               LiFx::debugEcho ("Trigger ticks");
               if(%tth > 0) {
-                %player.client.cmSendClientMessage(2475, LiFxHealer::getTimeToHeal(%player.client) SPC "Seconds until you will be healed");
+                %player.client.cmSendClientMessage(2475, LiFxHealer::getTimeToHeal(%player.client) SPC "Seconds to change class");
               }
               else {
                 LiFxHealerTrigger.schedule(5000,"checkDistance",%player, %trigger);
@@ -151,13 +152,16 @@ function LiFxHealer::Heal(%client)
           }
       }
   } 
-  function LiFxHealerTrigger::checkDistance(%this, %player, %trigger) {
-    %player.client.cmSendClientMessage(2475, "distance" SPC VectorDist(%player.POSITION, %trigger.POSITION));
-    if(VectorDist(%player.POSITION, %trigger.POSITION) < 8.0) { //&& VectorDist(%player.POSITION, %trigger.POSITION) > 2.0) {
-      LiFxHealer::Heal(%player.client);
+function LiFxHealerTrigger::checkDistance(%this, %player, %trigger) {
+    %distance = VectorDist(%player.POSITION, %trigger.POSITION);    
+    if (%distance < 4.0) {
+        LiFxHealer::Heal(%player.client);
+    } else if (%distance > 15.0) {
+        // Gracz jest zbyt daleko, nie wyświetlaj komunikatu ani nie dezaktywuj wyzwalacza
     } else {
-      %player.client.cmSendClientMessage(2475, "you are too far away, come closer if you want to heal!");
+        %player.client.cmSendClientMessage(2475, "You are too far away, come closer if you want to become an Archer!");
+        %trigger.setActive(false);
     }
-  }
+}
 };
 activatePackage(LiFxHealer);
