@@ -133,7 +133,7 @@ function LiFxHealer::Heal(%client)
   }
   function LiFxHealer::onEnterTrigger(%this, %trigger, %player) {
       LiFx::debugEcho ("Enter the trigger zone");
-      %player.client.cmSendClientMessage(2475, "Come up here so I can make you an Archer.");
+      %player.client.cmSendClientMessage(2475, "Come here so i can give you a rub and heal.");
       
   }
   function LiFxHealerTrigger::onTickTrigger(%this, %trigger) {
@@ -145,7 +145,7 @@ function LiFxHealer::Heal(%client)
               %tth = LiFxHealer::getTimeToHeal(%player.client);
               LiFx::debugEcho ("Trigger ticks");
               if(%tth > 0) {
-                %player.client.cmSendClientMessage(2475, LiFxHealer::getTimeToHeal(%player.client) SPC "Seconds to change class");
+                %player.client.cmSendClientMessage(2475, LiFxHealer::getTimeToHeal(%player.client) SPC "Seconds until you will be healed");
               }
               else {
                 LiFxHealerTrigger.schedule(5000,"checkDistance",%player, %trigger);
@@ -160,7 +160,7 @@ function LiFxHealerTrigger::checkDistance(%this, %player, %trigger) {
     } else if (%distance > 15.0) {
         // Gracz jest zbyt daleko, nie wyświetlaj komunikatu ani nie dezaktywuj wyzwalacza
     } else {
-        %player.client.cmSendClientMessage(2475, "You are too far away, come closer if you want to become an Archer!");
+        %player.client.cmSendClientMessage(2475, "you are too far away, come closer if you want to heal!");
         %trigger.setActive(false);
     }
 }
